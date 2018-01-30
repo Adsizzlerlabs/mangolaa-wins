@@ -46,7 +46,7 @@ class CreativesViewHandler implements Handler<RoutingContext> {
             if(ar.succeeded()){
                 executor.execute{
                     def creatives = ar.result()
-                    def json = Json.toPrettyJson([result : creatives])
+                    def json = Json.encodePretty([result : creatives])
                     resp.putHeader(CONTENT_TYPE, APPLICATION_JSON)
                         .end(json)
                 }

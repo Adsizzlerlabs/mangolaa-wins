@@ -4,11 +4,13 @@ package com.adsizzler.mangolaa.wins.util
  */
 class Strings {
 
-     static final String EMPTY = "";
+     static final String EMPTY = ""
 
-    /*
-    * Returns false if the String does not have text after trimming
-    * */
+    /**
+     * Validate if a String has text in it. Whitespaces are not considered valid text
+     * @param text The String that has to be validated
+     * @return false if the String does not have text
+     */
      static boolean hasText(String text){
         if(!text){
             return false
@@ -21,10 +23,12 @@ class Strings {
         return false
     }
 
-    /*
-    * Uses a StringBuilder to build an array of objects. The value returned in the Object's toString method is considered
-    * If a null is passed in the array, it is simply ignored
-    * */
+    /**
+     * Uses a StringBuilder to build an array of objects. The value returned in the Object's toString method is considered
+     * If a null is passed in the array, it is simply ignored
+     * @param array the array of objects that will be concatenated
+     * @return concatenated String
+     */
     static String build(Object... array){
         Assert.notNull(array, "array cannot be null")
         def sb = new StringBuilder()

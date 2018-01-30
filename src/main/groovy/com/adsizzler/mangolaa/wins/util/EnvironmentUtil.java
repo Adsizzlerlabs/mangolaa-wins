@@ -15,10 +15,6 @@ public class EnvironmentUtil{
     @Autowired
     private Environment environment;
 
-    public boolean isProduction(){
-        return !(isDev() || isTest());
-    }
-
     public boolean isDev(){
         return Arrays.asList(environment.getActiveProfiles()).contains("dev");
     }

@@ -1,6 +1,6 @@
 package com.adsizzler.mangolaa.wins.domain.enums
 
-import com.adsizzler.mangolaa.wins.jackson.StatusDeserializer
+import com.adsizzler.mangolaa.wins.jackson.deserializer.StatusDeserializer
 import com.adsizzler.mangolaa.wins.util.Strings
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 

@@ -35,7 +35,6 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
     }
 
     /**
-     * Refer https://bitbucket.org/adsizzleradserver/wins/wiki/Home for list of available query params
      * Handle the win event. Return the markup if a valid creative id is passed, and push the WinNotification event to
      * Kafka
      * @param rc Routing Context

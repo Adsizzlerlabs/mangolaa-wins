@@ -1,4 +1,4 @@
-package com.adsizzler.mangolaa.wins.jackson
+package com.adsizzler.mangolaa.wins.jackson.deserializer
 
 import com.adsizzler.mangolaa.wins.domain.enums.Status
 import com.fasterxml.jackson.core.JsonParser

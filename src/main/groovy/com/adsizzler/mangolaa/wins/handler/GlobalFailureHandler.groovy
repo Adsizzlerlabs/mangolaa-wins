@@ -31,7 +31,7 @@ class GlobalFailureHandler implements Handler<RoutingContext> {
                      log.error '', msg
         }
 
-        def responseMsg = Json.toPrettyJson([msg: msg])
+        def responseMsg = Json.encodePretty([msg: msg])
         resp.putHeader(CONTENT_TYPE, APPLICATION_JSON)
             .end(responseMsg)
     }

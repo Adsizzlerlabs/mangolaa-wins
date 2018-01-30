@@ -29,7 +29,7 @@ class MetricsHandler implements Handler<RoutingContext> {
         def response = routingContext.response()
         def jsonMetrics = metricsService.getMetricsSnapshot(vertx)
 
-        def json = Json.toPrettyJson(jsonMetrics)
+        def json = Json.encodePretty(jsonMetrics)
         response.putHeader("Content-type","application/json")
                 .putHeader("Connection","Keep-Alive")
                 .end(json)

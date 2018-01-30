@@ -1,4 +1,4 @@
-package com.adsizzler.mangolaa.wins.jackson
+package com.adsizzler.mangolaa.wins.jackson.serializer
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonProcessingException
