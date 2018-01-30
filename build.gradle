@@ -1,0 +1,97 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+final String VERSION  = "1.0"
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: "org.sonarqube"
+apply plugin: "jacoco"
+
+group = 'com.adsizzler.mangolaa'
+
+sourceCompatibility = 1.8
+version = VERSION
+
+repositories {
+	mavenCentral()
+}
+
+jar{
+	baseName =  "wins"
+	version =  VERSION
+}
+
+final vertxVersion = "3.5.0"
+
+configurations {
+	providedRuntime
+	//Has often caused problems, we will just exclude this dependency altogether
+	all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+}
+
+//To run the jar file a Linux service
+springBoot {
+	executable = true
+}
+
+jacocoTestReport {
+	group = "reporting"
+	description = "Generate Jacoco coverage reports after running tests."
+	reports {
+		xml.setEnabled false
+		csv.setEnabled false
+		html.destination new File("${buildDir}/jacocoHtml")
+	}
+}
+test.finalizedBy jacocoTestReport
+
+dependencies {
+
+	//Spring Boot
+	compile('org.springframework.boot:spring-boot-starter')
+	runtime('org.springframework.boot:spring-boot-devtools')
+
+	//GROOVY
+	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.13'
+
+	//Vertx
+	compile group: 'io.vertx', name: 'vertx-core', version: vertxVersion
+	compile group: 'io.vertx', name: 'vertx-dropwizard-metrics', version: vertxVersion
+	compile group: 'io.vertx', name: 'vertx-web', version: vertxVersion
+	compile group: 'io.vertx', name: 'vertx-kafka-client', version: vertxVersion
+
+	//Misc
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.9'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.9'
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'
+
+	//MySQL and H2
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.8.RELEASE'
+	runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+	runtime group: 'com.h2database', name: 'h2', version: '1.4.196'
+
+	//Misc
+	compile group: 'com.googlecode.cqengine', name: 'cqengine', version: '2.12.2'
+
+	//Testing
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+	testCompile group: 'org.spockframework', name: 'spock-spring', version: '1.1-groovy-2.4'
+	testCompile group: 'io.vertx', name: 'vertx-unit', version: vertxVersion
+
+	//Devops
+	compile group: 'com.aestasit.infrastructure.sshoogr', name: 'sshoogr', version: '0.9.26'
+
+}
