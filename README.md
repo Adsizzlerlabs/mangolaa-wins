@@ -35,7 +35,7 @@ https://wins.mangolaa.com/?cr_id=3&bid_req_id=123&bid_resp_id=345&imp_id=abc&sea
 * **Framework** : Spring Boot on top of Vert.x
 * **Cache** : CQEngine as a Local cache
 * **Messaging** : Apache Kafka as both producer and Consumer
-* **Repository** : Fetching CMS data from MySQL on startup, and Cassandra to deal with BidRequests and BidResponse, and H2 for testing
+* **Repository** : Fetching CMS data from MySQL on startup
 * **Tests** : Spring-Spock, Vertx-unit
 * **DevOps** : Docker
 
