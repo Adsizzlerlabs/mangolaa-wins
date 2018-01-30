@@ -21,20 +21,12 @@ class CreativeServiceImpl implements CreativeService {
         this.creativeRepository = creativeRepository
     }
 
-    /**
-     * Find a Creative by its id
-     * @param id The id of the creative
-     * @return A Future that contains the creative, or an exception
-     */
     @Override
     Future<Creative> findOneById(Integer id) {
         Assert.notNull(id, 'id cannot be null')
         creativeRepository.findOneById(id)
     }
 
-    /**
-     * @return A Future that contains the Set of creatives currently in the system, or an exception
-     */
     @Override
     Future<Set<Creative>> findAll() {
         creativeRepository.findAllFromCache()

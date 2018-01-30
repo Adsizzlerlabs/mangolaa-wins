@@ -1,11 +1,16 @@
 package com.adsizzler.mangolaa.wins.handler
 
+import com.adsizzler.mangolaa.wins.constants.HttpHeaderValues
 import com.adsizzler.mangolaa.wins.util.Json
 import io.vertx.core.Handler
 import io.vertx.core.Vertx
+import io.vertx.core.http.HttpHeaders
 import io.vertx.ext.dropwizard.MetricsService
 import io.vertx.ext.web.RoutingContext
 import org.springframework.stereotype.Component
+
+import static com.adsizzler.mangolaa.wins.constants.HttpHeaderValues.*
+import static io.vertx.core.http.HttpHeaders.*
 
 /**
  * Created by ankushsharma on 04/11/17.
@@ -25,13 +30,13 @@ class MetricsHandler implements Handler<RoutingContext> {
     }
 
     @Override
-     void handle(final RoutingContext routingContext) {
-        def response = routingContext.response()
+     void handle(final RoutingContext rc) {
+        def response = rc.response()
         def jsonMetrics = metricsService.getMetricsSnapshot(vertx)
 
         def json = Json.encodePretty(jsonMetrics)
-        response.putHeader("Content-type","application/json")
-                .putHeader("Connection","Keep-Alive")
+        response.putHeader(CONTENT_TYPE, APPLICATION_JSON)
+                .putHeader(CONNECTION, KEEP_ALIVE)
                 .end(json)
     }
 }

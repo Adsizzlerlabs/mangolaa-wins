@@ -5,6 +5,7 @@ import com.adsizzler.mangolaa.wins.domain.enums.Status
 import com.adsizzler.mangolaa.wins.util.Assert
 import com.googlecode.cqengine.attribute.SimpleAttribute
 import com.googlecode.cqengine.query.option.QueryOptions
+import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
 
@@ -12,6 +13,7 @@ import groovy.transform.ToString
  * Created by ankushsharma on 11/12/17.
  */
 @ToString(includePackage = false)
+@EqualsAndHashCode(excludes = 'markupTemplate')
 class Creative {
 
     final Integer id
