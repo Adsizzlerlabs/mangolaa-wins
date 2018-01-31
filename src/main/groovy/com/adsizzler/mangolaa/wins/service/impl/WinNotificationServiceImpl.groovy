@@ -19,29 +19,33 @@ import org.springframework.stereotype.Service
 @Slf4j
 class WinNotificationServiceImpl implements WinNotificationService {
 
-    private final KafkaProducer<String,byte[]> kafka
+    private final KafkaProducer<String,byte[]> kafkaProducer
 
-    WinNotificationServiceImpl(KafkaProducer<String,byte[]> kafka) {
-        this.kafka = kafka
+    WinNotificationServiceImpl(KafkaProducer<String,byte[]> kafkaProducer) {
+        this.kafkaProducer = kafkaProducer
     }
 
     @Override
-    Future<Void> queueToKafka(WinNotification win) {
+    Future<Boolean> queueToKafka(WinNotification win) {
         Assert.notNull(win, 'win cannot be null')
         def future = Future.future()
+        def pushed = false
 
         def payload = Gzip.compress(Json.encode(win))
         def write = new KafkaProducerRecordImpl<String,byte[]>(KafkaTopics.WINS, payload)
-        kafka.write(write, { done ->
+        kafkaProducer.write(write, { done ->
             if(done.succeeded()){
-                future.complete()
+                pushed = true
             }
             else{
-                log.error '', done.cause().message
+                future.fail(done.cause())
             }
+            future.complete(pushed)
         })
         .exceptionHandler{ Throwable ex ->
-            future.fail(ex)
+            //Don't use future.fail(ex). Rather, look into Kafka retry policies.
+            log.error '', ex
+            future.complete(false)
         }
         future
     }

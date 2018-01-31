@@ -8,6 +8,7 @@ import com.adsizzler.mangolaa.wins.util.Assert
 import com.googlecode.cqengine.IndexedCollection
 import groovy.util.logging.Slf4j
 import io.vertx.core.Future
+import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Repository
 
 import static com.googlecode.cqengine.query.QueryFactory.equal
@@ -74,7 +75,50 @@ class CreativeRepositoryImpl implements CreativeRepository {
     }
 
     @Override
+    Future<Void> putToCache(Creative creative) {
+        Assert.notNull(creative, 'creative cannot be null')
+        def future = Future.future()
+        try{
+            creativeCache.add(creative)
+            future.complete()
+        }
+        catch(ex){
+            future.fail(ex)
+        }
+        future
+    }
+
+    @Override
+    Future<Void> save(CreativeDTO dto) {
+        Assert.notNull(dto, 'dto cannot be null')
+        def future = Future.future()
+        try{
+            creativePersistentStore.save(dto)
+            future.complete()
+        }
+        catch(ex){
+            future.fail(ex)
+        }
+        future
+    }
+
+    @Override
     Set<CreativeDTO> findAll() {
         creativePersistentStore.findAll()?.toSet()
+    }
+
+    @Override
+    @Profile("dev")
+    Future<Void> deleteAll() {
+        def future = Future.future()
+        try{
+            creativeCache.removeAll()
+            creativePersistentStore.deleteAll()
+            future.complete()
+        }
+        catch(ex){
+            future.fail(ex)
+        }
+        future
     }
 }

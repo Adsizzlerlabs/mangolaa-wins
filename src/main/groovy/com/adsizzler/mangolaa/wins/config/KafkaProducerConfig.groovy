@@ -23,15 +23,15 @@ class KafkaProducerConfig {
     @Autowired
     EnvironmentUtil env
 
-    @Bean("kafka")
-    KafkaProducer<String,byte[]> kafkaConsumer(){
-        Properties config = new Properties();
+    @Bean("kafkaProducer")
+    KafkaProducer<String,byte[]> kafkaProducer(){
+        Properties config = new Properties()
         String host
         if(env.isDev() || env.isTest()){
             host = "localhost:9092"
         }
         else{
-            host = "192.168.157.227:9092"
+            host = "production kafka cluster address"
         }
         config.put(BOOTSTRAP_SERVERS_CONFIG, host)
         config.put(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class)

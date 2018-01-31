@@ -12,7 +12,7 @@ public class Gzip {
 
 
     public static byte[] compress(final String str) {
-        if ((str == null) || (str.length() == 0)) {
+        if (!Strings.hasText(str)) {
             throw new IllegalArgumentException("Cannot zip null or empty string");
         }
 
@@ -21,7 +21,7 @@ public class Gzip {
                 gzipOutputStream.write(str.getBytes(StandardCharsets.UTF_8));
             }
             return byteArrayOutputStream.toByteArray();
-        } catch(IOException e) {
+        } catch(final IOException e) {
             throw new RuntimeException("Failed to zip content", e);
         }
     }

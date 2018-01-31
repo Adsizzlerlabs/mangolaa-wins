@@ -38,6 +38,10 @@ class CreativesViewHandler implements Handler<RoutingContext> {
         executor.shutdown()
     }
 
+    /**
+     * Display all Creatives currently in the system as JSON. Used for debugging purpose only
+     * @param rc RoutingContext
+     */
     @Override
     void handle(RoutingContext rc) {
         def resp = rc.response()

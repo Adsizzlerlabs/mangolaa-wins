@@ -9,6 +9,7 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 /**
+ * DTO object that will interact directly with permanent storage(MySQL)
  * Created by ankushsharma on 29/01/18.
  */
 @ToString(includePackage = false)

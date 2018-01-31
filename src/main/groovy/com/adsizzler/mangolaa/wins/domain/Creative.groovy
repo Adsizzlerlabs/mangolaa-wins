@@ -52,7 +52,7 @@ class Creative {
     }
 
     /**
-     * Field that is used as an Index in CQEngine
+     * Use creativeId as an Index in CQEngine
      */
     static final ID = new SimpleAttribute<Creative, Integer>() {
 

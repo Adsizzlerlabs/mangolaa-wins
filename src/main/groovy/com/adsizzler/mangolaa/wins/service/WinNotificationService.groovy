@@ -8,5 +8,11 @@ import io.vertx.core.Future
  */
 interface WinNotificationService {
 
-    Future<Void> queueToKafka(WinNotification wins)
+    /**
+     * Convert POJO -> JSON -> GZIP . Push gzip byte[] to Kafka. Gzip will save Network bandwidth
+     * @param win WinNotification to push to Kafka
+     * @return Future with a boolean value of true if @param win was successfully pushed to Kafka, and false otherwise
+     */
+    Future<Boolean> queueToKafka(WinNotification win)
+
 }

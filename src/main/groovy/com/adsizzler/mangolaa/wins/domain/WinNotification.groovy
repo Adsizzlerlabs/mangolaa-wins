@@ -1,7 +1,9 @@
 package com.adsizzler.mangolaa.wins.domain
 
+import com.adsizzler.mangolaa.wins.util.Gzip
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.ToString
+import io.vertx.core.json.Json
 
 import java.time.ZonedDateTime
 
@@ -74,4 +76,5 @@ class WinNotification {
         this.clearingPrice = fields['clearingPrice'] as Integer
         this.seatId = fields['seatId'] as String
     }
+
 }

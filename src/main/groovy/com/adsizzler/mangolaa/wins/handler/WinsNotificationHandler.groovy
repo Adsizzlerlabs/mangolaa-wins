@@ -35,8 +35,7 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
     }
 
     /**
-     * Handle the win event. Return the markup if a valid creative id is passed, and push the WinNotification event to
-     * Kafka
+     * Handle the win event. Return the markup if a valid creative id is passed, and push the WinNotification event to Kafka
      * @param rc Routing Context
      */
     @Override
