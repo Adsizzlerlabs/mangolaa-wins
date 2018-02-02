@@ -3,7 +3,6 @@ package com.adsizzler.mangolaa.wins.config
 import com.adsizzler.mangolaa.wins.domain.Creative
 import com.googlecode.cqengine.ConcurrentIndexedCollection
 import com.googlecode.cqengine.IndexedCollection
-import com.googlecode.cqengine.index.hash.HashIndex
 import com.googlecode.cqengine.index.unique.UniqueIndex
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

@@ -23,6 +23,7 @@ class StatusJpaConverterSpec extends BaseSpockSpec {
     }
 
     def "convert int code to its Status enum representation"(){
+
         when :
             def result = new StatusJpaConverter().convertToEntityAttribute(code)
 

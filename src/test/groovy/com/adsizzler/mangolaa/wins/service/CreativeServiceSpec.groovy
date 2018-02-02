@@ -1,11 +1,9 @@
 package com.adsizzler.mangolaa.wins.service
 
 import com.adsizzler.mangolaa.wins.BaseSpockSpec
-import com.adsizzler.mangolaa.wins.dataloader.repository.CreativePersistentStore
 import com.adsizzler.mangolaa.wins.domain.Creative
 import com.adsizzler.mangolaa.wins.domain.enums.Status
 import com.adsizzler.mangolaa.wins.repository.CreativeRepository
-import com.googlecode.cqengine.IndexedCollection
 import org.springframework.beans.factory.annotation.Autowired
 
 /**

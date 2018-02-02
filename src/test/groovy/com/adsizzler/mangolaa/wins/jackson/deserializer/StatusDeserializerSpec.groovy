@@ -34,7 +34,6 @@ class StatusDeserializerSpec extends BaseSpockSpec {
 
             def result = new StatusDeserializer().deserialize(jsonParser,deserializationCtx)
 
-
         then :
             result  == expectedResult
 
@@ -44,7 +43,6 @@ class StatusDeserializerSpec extends BaseSpockSpec {
             'deactive'                     ||  Status.DEACTIVE
             'random_string'                ||  Status.UNKNOWN
             'ACTIVE'                       ||  Status.ACTIVE
-
     }
 
 

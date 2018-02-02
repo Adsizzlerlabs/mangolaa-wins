@@ -46,7 +46,11 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
 
         def queryParams = req.params()
 
-        def creativeId = queryParams.get('cr_id') as Integer
+        //From path params
+        def creativeId = req.getParam('cr_id') as Integer
+        def sourceId = req.getParam('src_id') as Integer
+
+        //Macros from Query param
         def bidReqId = queryParams.get('bid_req_id')
         def bidRespId = queryParams.get('bid_resp_id')
         def impId = queryParams.get('imp_id')
@@ -66,7 +70,20 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
                     def markupTemplate = creative.markupTemplate
 
                     //Build the markup to send from the markup template by filling macros
-                    def markup = new AdMarkupBuilder(markupTemplate).build()
+                    def campaignId = creative.campaignId
+                    def advId = creative.advertiserId
+                    def clientId = creative.clientId
+
+                    def markup = new AdMarkupBuilder(
+                            markupTemplate : markupTemplate,
+                            campaignId : campaignId,
+                            sourceId:  sourceId,
+                            creativeId:  creativeId,
+                            advId:   advId,
+                            clientId:  clientId,
+                            bidReqId : bidReqId,
+                            bidRespId:  bidRespId
+                    ).build()
 
                     //Set response values
                     resp.putHeader(CONTENT_TYPE, TEXT_HTML)
@@ -76,9 +93,10 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
                     def winNotification = new WinNotification(
                             timestamp : timestamp,
                             creativeId : creativeId,
-                            campaignId : creative.campaignId,
-                            advId : creative.advertiserId,
-                            clientId : creative.clientId,
+                            campaignId : campaignId,
+                            advId : advId,
+                            sourceId : sourceId,
+                            clientId : clientId,
                             bidReqId : bidReqId,
                             bidRespId : bidRespId,
                             impId : impId,

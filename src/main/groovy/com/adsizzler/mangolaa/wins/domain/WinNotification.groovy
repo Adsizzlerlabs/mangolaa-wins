@@ -1,9 +1,7 @@
 package com.adsizzler.mangolaa.wins.domain
 
-import com.adsizzler.mangolaa.wins.util.Gzip
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.ToString
-import io.vertx.core.json.Json
 
 import java.time.ZonedDateTime
 
@@ -24,6 +22,9 @@ class WinNotification {
 
     @JsonProperty(value = 'campId', required = true)
     private final Integer campaignId
+
+    @JsonProperty(value = 'srcId', required = true)
+    private final Integer sourceId
 
     @JsonProperty(value = "advId", required = true)
     private final Integer advId
@@ -64,6 +65,7 @@ class WinNotification {
         this.markup = fields['markup'] as String
         this.creativeId = fields['creativeId'] as Integer
         this.campaignId = fields['campaignId'] as Integer
+        this.sourceId = fields['sourceId'] as Integer
         this.advId = fields['advId'] as Integer
         this.clientId = fields['clientId'] as Integer
         this.bidReqId = fields['bidReqId'] as String
