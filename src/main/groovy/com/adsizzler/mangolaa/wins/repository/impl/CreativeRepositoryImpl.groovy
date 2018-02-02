@@ -109,16 +109,8 @@ class CreativeRepositoryImpl implements CreativeRepository {
 
     @Override
     @Profile("dev")
-    Future<Void> deleteAll() {
-        def future = Future.future()
-        try{
-            creativesCache.removeAll()
-            creativePersistentStore.deleteAll()
-            future.complete()
-        }
-        catch(ex){
-            future.fail(ex)
-        }
-        future
+    void deleteAll() {
+        creativesCache.removeAll()
+        creativePersistentStore.deleteAll()
     }
 }

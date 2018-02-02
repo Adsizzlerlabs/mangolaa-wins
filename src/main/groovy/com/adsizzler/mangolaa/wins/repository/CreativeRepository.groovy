@@ -52,8 +52,7 @@ interface CreativeRepository {
 
     /**
      * Evict all creatives from Cache and remove from permanent storage as well. Only for testing purposes.
-     * @return Future with null value if no error occured, and an error otherwise
      */
-    Future<Void> deleteAll()
+    void deleteAll()
 
 }

@@ -34,7 +34,7 @@ class WinNotificationServiceImpl implements WinNotificationService {
         def payload = Gzip.compress(Json.encode(win))
         def write = new KafkaProducerRecordImpl<String,byte[]>(KafkaTopics.WINS, payload)
         kafkaProducer.write(write, { done ->
-            if(done.succeeded()){
+            if(done.succeeded()) {
                 pushed = true
             }
             future.complete(pushed)
