@@ -3,11 +3,12 @@ package com.adsizzler.mangolaa.wins.handler
 import com.adsizzler.mangolaa.wins.exceptions.ResourceNotFoundException
 import com.adsizzler.mangolaa.wins.util.Json
 import groovy.util.logging.Slf4j
+import io.netty.handler.codec.http.HttpResponseStatus
 import io.vertx.core.Handler
 import io.vertx.ext.web.RoutingContext
 import org.springframework.stereotype.Component
 
-import static com.adsizzler.mangolaa.wins.constants.HttpHeaderValues.getAPPLICATION_JSON
+import static com.adsizzler.mangolaa.wins.constants.HttpHeaderValues.APPLICATION_JSON
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE
 
 /**
@@ -19,6 +20,7 @@ import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE
 @Slf4j
 class GlobalFailureHandler implements Handler<RoutingContext> {
 
+    static final String GLOBAL_ERROR_MSG = "Internal Server Error"
 
     @Override
     void handle(RoutingContext rc) {
@@ -27,12 +29,13 @@ class GlobalFailureHandler implements Handler<RoutingContext> {
         def msg
         switch(exception){
             case ResourceNotFoundException : msg = exception.message; break
-            default : msg = "Internal Server error Occured"
-                     log.error '', msg
+            default : msg = GLOBAL_ERROR_MSG
+                      log.error '', msg
         }
 
         def responseMsg = Json.encodePretty([msg: msg])
         resp.putHeader(CONTENT_TYPE, APPLICATION_JSON)
+            .setStatusCode(HttpResponseStatus.OK.code())
             .end(responseMsg)
     }
 }

@@ -37,15 +37,11 @@ class WinNotificationServiceImpl implements WinNotificationService {
             if(done.succeeded()){
                 pushed = true
             }
-            else{
-                future.fail(done.cause())
-            }
             future.complete(pushed)
         })
         .exceptionHandler{ Throwable ex ->
-            //Don't use future.fail(ex). Rather, look into Kafka retry policies.
+            // Don't use future.fail(ex). Rather, look into Kafka retry policies.
             log.error '', ex
-            future.complete(false)
         }
         future
     }

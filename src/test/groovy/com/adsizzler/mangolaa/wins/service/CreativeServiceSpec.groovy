@@ -48,6 +48,7 @@ class CreativeServiceSpec extends BaseSpockSpec {
     }
 
     def "Find all creatives. Only 2 creatives must be returned as per data.sql file"(){
+
         when :
             def creatives = creativeService.findAll().result().toList().sort{ it.id }
 

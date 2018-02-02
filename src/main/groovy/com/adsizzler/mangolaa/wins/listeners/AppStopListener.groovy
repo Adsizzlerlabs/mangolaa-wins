@@ -2,6 +2,8 @@ package com.adsizzler.mangolaa.wins.listeners
 
 import groovy.util.logging.Slf4j
 import io.vertx.core.Vertx
+import io.vertx.core.http.HttpServer
+import io.vertx.ext.web.Router
 import io.vertx.kafka.client.producer.KafkaProducer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationListener
@@ -42,8 +44,9 @@ class AppStopListener implements ApplicationListener<ContextClosedEvent> {
                 log.info 'Closed Vert.x successfully'
             }
             else{
-                log.info 'Unable to close Vert.x'
+                log.error 'Unable to close Vert.x'
             }
         }
+
     }
 }

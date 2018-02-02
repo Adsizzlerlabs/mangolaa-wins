@@ -53,7 +53,7 @@ class WinNotificationsVerticle extends AbstractVerticle {
 
         router.get('/metrics')
               .handler(metricsHandler)
-               .failureHandler(failureHandler)
+              .failureHandler(failureHandler)
 
         router.get('/creatives')
               .handler(creativesViewHandler)

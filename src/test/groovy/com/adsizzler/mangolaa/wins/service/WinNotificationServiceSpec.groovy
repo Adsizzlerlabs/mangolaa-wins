@@ -41,7 +41,8 @@ class WinNotificationServiceSpec extends BaseSpockSpec {
 
             winNotificationService.queueToKafka(win).setHandler{ ar ->
                 conditions.evaluate{
-                    assert ar.result()
+                    def pushedToKafka = ar.result()
+                    assert pushedToKafka
                 }
             }
             conditions.await()

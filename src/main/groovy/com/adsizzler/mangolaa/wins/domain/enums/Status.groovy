@@ -22,7 +22,6 @@ enum Status {
     }
 
     /**
-     *
      * @param code the int value associated with a instance of Status
      * @return Status!
      */

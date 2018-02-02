@@ -13,15 +13,15 @@ import groovy.transform.ToString
  * Created by ankushsharma on 11/12/17.
  */
 @ToString(includePackage = false)
-@EqualsAndHashCode(excludes = 'markupTemplate')
+@EqualsAndHashCode
 class Creative {
 
-    final Integer id
-    final Status status
-    final String markupTemplate
-    final Integer campaignId
-    final Integer advertiserId
-    final Integer clientId
+     final Integer id
+     final Status status
+     final String markupTemplate
+     final Integer campaignId
+     final Integer advertiserId
+     final Integer clientId
 
     /**
      * Create an instance of Creative

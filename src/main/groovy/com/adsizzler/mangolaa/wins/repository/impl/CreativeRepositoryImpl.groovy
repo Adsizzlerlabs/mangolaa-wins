@@ -20,15 +20,15 @@ import static com.googlecode.cqengine.query.QueryFactory.equal
 @Slf4j
 class CreativeRepositoryImpl implements CreativeRepository {
 
-    private final IndexedCollection<Creative> creativeCache
+    private final IndexedCollection<Creative> creativesCache
     private final CreativePersistentStore creativePersistentStore
 
     CreativeRepositoryImpl(
-            IndexedCollection<Creative> creativeCache,
+            IndexedCollection<Creative> creativesCache,
             CreativePersistentStore creativePersistentStore
     )
     {
-        this.creativeCache = creativeCache
+        this.creativesCache = creativesCache
         this.creativePersistentStore = creativePersistentStore
     }
 
@@ -38,7 +38,7 @@ class CreativeRepositoryImpl implements CreativeRepository {
 
         def future = Future.future()
         def query = equal(Creative.ID, id)
-        def resultSet = creativeCache.retrieve(query)
+        def resultSet = creativesCache.retrieve(query)
         //Guaranteed to contain only 1 element, as each creative is assigned to a unique id
         if(resultSet) {
             def creative = resultSet.find()
@@ -55,7 +55,7 @@ class CreativeRepositoryImpl implements CreativeRepository {
     @Override
     Future<Set<Creative>> findAllFromCache() {
         def future = Future.future()
-        future.complete(creativeCache.toSet())
+        future.complete(creativesCache.toSet())
         future
     }
 
@@ -65,7 +65,7 @@ class CreativeRepositoryImpl implements CreativeRepository {
         Assert.notNull(newCreative, 'newCreative cannot be null')
         def future = Future.future()
         try{
-            creativeCache.update([old], [newCreative])
+            creativesCache.update([old], [newCreative])
             future.complete()
         }
         catch(ex){
@@ -79,7 +79,7 @@ class CreativeRepositoryImpl implements CreativeRepository {
         Assert.notNull(creative, 'creative cannot be null')
         def future = Future.future()
         try{
-            creativeCache.add(creative)
+            creativesCache.add(creative)
             future.complete()
         }
         catch(ex){
@@ -112,7 +112,7 @@ class CreativeRepositoryImpl implements CreativeRepository {
     Future<Void> deleteAll() {
         def future = Future.future()
         try{
-            creativeCache.removeAll()
+            creativesCache.removeAll()
             creativePersistentStore.deleteAll()
             future.complete()
         }

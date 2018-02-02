@@ -40,6 +40,10 @@ class VertxConfig {
     @Bean
     Router router(){
         Router.router(vertx())
+              // To handle UnHandeled Exception
+              .exceptionHandler{  ex ->
+                    log.error '', ex
+              }
     }
 }
 
