@@ -17,7 +17,7 @@ interface CreativeRepository {
     Future<Creative> findOneById(Integer id)
 
     /**
-     * Returns all Creatives currently in Cache
+     * Returns all Creatives in cache
      * @return A Future that contains the Set of creatives currently in our local Cache
      */
     Future<Set<Creative>> findAllFromCache()
@@ -26,31 +26,33 @@ interface CreativeRepository {
      * Evict old creative, and replace with new one
      * @param old Old creative to evict
      * @param newCreative The new Creative object to put to cache
-     * @return
+     * @return Future with null value if no error occured, and an error otherwise
      */
     Future<Void> updateCache(Creative old, Creative newCreative)
 
     /**
-     * Put a Creative to Cache
+     * Put a Creative to cache
+     * @param creative Creative to put to Cache
+     * @return Future with null value if no error occured, and an error otherwise
      */
     Future<Void> putToCache(Creative creative)
 
     /**
      * Save to permanent storage
      * @param dto CreativeDTO to persist to permanent storage
-     * @return
+     * @return Future with null value if no error occured, and an error otherwise
      */
     Future<Void> save(CreativeDTO dto)
 
     /**
      * Get all Creatives from permanent storage
-     * @return
+     * @return Future with null value if no error occured, and an error otherwise
      */
     Set<CreativeDTO> findAll()
 
     /**
      * Evict all creatives from Cache and remove from permanent storage as well. Only for testing purposes.
-     * @return
+     * @return Future with null value if no error occured, and an error otherwise
      */
     Future<Void> deleteAll()
 
