@@ -1,4 +1,4 @@
-package com.adsizzler.mangolaa.wins.dataloader.dto
+package com.adsizzler.mangolaa.wins.dataloader.entity
 
 import com.adsizzler.mangolaa.wins.domain.enums.Status
 import groovy.transform.EqualsAndHashCode
@@ -16,12 +16,12 @@ import javax.persistence.Table
 @Entity
 @Table(name = 'creatives')
 @EqualsAndHashCode
-class CreativeDTO extends BaseEntity {
+class CreativeEntity extends BaseEntity {
 
     @Column(name = 'markup_template')
     String markupTemplate
 
-    @Column(name = 'status')
+    @Column(name = 'status', columnDefinition = "VARCHAR(1000) default ''")
     Status status
 
     @Column(name = 'campaign_id')

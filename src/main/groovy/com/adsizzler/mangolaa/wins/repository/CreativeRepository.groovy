@@ -1,6 +1,6 @@
 package com.adsizzler.mangolaa.wins.repository
 
-import com.adsizzler.mangolaa.wins.dataloader.dto.CreativeDTO
+import com.adsizzler.mangolaa.wins.dataloader.entity.CreativeEntity
 import com.adsizzler.mangolaa.wins.domain.Creative
 import io.vertx.core.Future
 
@@ -37,18 +37,12 @@ interface CreativeRepository {
      */
     Future<Void> putToCache(Creative creative)
 
-    /**
-     * Save to permanent storage
-     * @param dto CreativeDTO to persist to permanent storage
-     * @return Future with null value if no error occured, and an error otherwise
-     */
-    Future<Void> save(CreativeDTO dto)
 
     /**
      * Get all Creatives from permanent storage
      * @return Future with null value if no error occured, and an error otherwise
      */
-    Set<CreativeDTO> findAll()
+    Set<CreativeEntity> findAll()
 
     /**
      * Evict all creatives from Cache and remove from permanent storage as well. Only for testing purposes.

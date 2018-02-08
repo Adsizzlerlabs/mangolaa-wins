@@ -1,5 +1,8 @@
 package com.adsizzler.mangolaa.wins.domain
 
+import com.adsizzler.mangolaa.wins.util.Assert
+import com.adsizzler.mangolaa.wins.util.Strings
+
 
 /**
  * Created by ankushsharma on 30/01/18.
@@ -27,6 +30,8 @@ class AdMarkupBuilder {
     }
 
     String build(){
+        Assert.notEmptyString(markupTemplate,'adMarkupTemplate cannot be null or empty')
+
         String campaignIdStr = campaignId
         String sourceIdStr = sourceId
         String creativeIdStr = creativeId
@@ -35,14 +40,27 @@ class AdMarkupBuilder {
 
         markupTemplate
                 //For Clicks and impressions tracking
-                .replace("{camp_id}", campaignIdStr)
-                .replace("{src_id}", sourceIdStr)
-                .replace("{creative_id}", creativeIdStr)
-                .replace("{cl_id}", clientIdStr)
-                .replace("{adv_id}", advIdStr)
+                .replace("{camp_id}", normalize(campaignIdStr))
+                .replace("{src_id}", normalize(sourceIdStr))
+                .replace("{creative_id}", normalize(creativeIdStr))
+                .replace("{cl_id}", normalize(clientIdStr))
+                .replace("{adv_id}", normalize(advIdStr))
 
                 //Bid Req and Bid Response
-                .replace("{bid_req_id}", bidReqId)
-                .replace("bid_resp_id}", bidRespId)
+                .replace("{bid_req_id}", normalize(bidReqId))
+                .replace("bid_resp_id}", normalize(bidRespId))
+    }
+
+    private static normalize(String param){
+        if(!Strings.hasText(param)){
+            return Strings.EMPTY
+        }
+        return URLEncoder.encode(param , "UTF-8")
+    }
+
+    public static void main(String[] args) {
+        def s = "https://google.com/"
+
+        s.replace("{a}", null)
     }
 }

@@ -1,6 +1,7 @@
 package com.adsizzler.mangolaa.wins.repository.impl
 
-import com.adsizzler.mangolaa.wins.dataloader.dto.CreativeDTO
+
+import com.adsizzler.mangolaa.wins.dataloader.entity.CreativeEntity
 import com.adsizzler.mangolaa.wins.dataloader.repository.CreativePersistentStore
 import com.adsizzler.mangolaa.wins.domain.Creative
 import com.adsizzler.mangolaa.wins.repository.CreativeRepository
@@ -89,21 +90,7 @@ class CreativeRepositoryImpl implements CreativeRepository {
     }
 
     @Override
-    Future<Void> save(CreativeDTO dto) {
-        Assert.notNull(dto, 'dto cannot be null')
-        def future = Future.future()
-        try{
-            creativePersistentStore.save(dto)
-            future.complete()
-        }
-        catch(ex){
-            future.fail(ex)
-        }
-        future
-    }
-
-    @Override
-    Set<CreativeDTO> findAll() {
+    Set<CreativeEntity> findAll() {
         creativePersistentStore.findAll()?.toSet()
     }
 

@@ -10,6 +10,11 @@ import java.util.zip.GZIPOutputStream;
  */
 public class Gzip {
 
+    /**
+     * Compress a String using gzip compression
+     * @param str String to compress using gzip compression
+     * @return gzip content as byte[]
+     */
     public static byte[] compress(final String str) {
         if (!Strings.hasText(str)) {
             throw new IllegalArgumentException("Cannot zip null or empty string");

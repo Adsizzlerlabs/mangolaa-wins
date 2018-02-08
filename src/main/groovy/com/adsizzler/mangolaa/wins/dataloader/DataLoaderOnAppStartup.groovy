@@ -23,11 +23,11 @@ class DataLoaderOnAppStartup implements ApplicationListener<ApplicationReadyEven
     @Override
     void onApplicationEvent(ApplicationReadyEvent event) {
         log.info 'Loading Creatives from DB'
-        def creativeDtos = creativeRepository.findAll()
-        creativeDtos.each{ dto ->
-            def creative = new Creative(dto)
+        def creativeEntities = creativeRepository.findAll()
+        creativeEntities.each{ entity ->
+            def creative = new Creative(entity)
             creativeRepository.putToCache(creative)
         }
-        log.info 'Loaded {} creatives from db', creativeDtos.size()
+        log.info 'Loaded {} creatives from db', creativeEntities.size()
     }
 }

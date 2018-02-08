@@ -23,7 +23,7 @@ enum Status {
 
     /**
      * @param code the int value associated with a instance of Status
-     * @return Status!
+     * @return Status
      */
     static Status from(int code){
         def result

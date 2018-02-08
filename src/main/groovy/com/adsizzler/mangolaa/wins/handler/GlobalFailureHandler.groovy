@@ -30,7 +30,7 @@ class GlobalFailureHandler implements Handler<RoutingContext> {
         switch(exception){
             case ResourceNotFoundException : msg = exception.message; break
             default : msg = GLOBAL_ERROR_MSG
-                      log.error '', msg
+                      log.error '', exception
         }
 
         def responseMsg = Json.encodePretty([msg: msg])

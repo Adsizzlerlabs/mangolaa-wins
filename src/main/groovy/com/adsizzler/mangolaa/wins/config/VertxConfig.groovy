@@ -28,7 +28,7 @@ class VertxConfig {
             )
         )
         .exceptionHandler{ ex ->
-            log.error 'Unhandeled Exception {}', ex
+            log.error 'Unhandled Exception {}', ex
         }
     }
 
@@ -42,7 +42,7 @@ class VertxConfig {
         Router.router(vertx())
               // To handle UnHandeled Exception
               .exceptionHandler{  ex ->
-                    log.error '', ex
+                    log.error 'Unhandled Exception {}', ex
               }
     }
 }

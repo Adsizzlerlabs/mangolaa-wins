@@ -1,4 +1,4 @@
-package com.adsizzler.mangolaa.wins.dataloader.dto
+package com.adsizzler.mangolaa.wins.dataloader.entity
 
 import javax.persistence.GeneratedValue
 import javax.persistence.Id

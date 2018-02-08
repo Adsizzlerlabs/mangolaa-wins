@@ -1,6 +1,7 @@
 package com.adsizzler.mangolaa.wins.handler
 
 import com.adsizzler.mangolaa.wins.domain.AdMarkupBuilder
+import com.adsizzler.mangolaa.wins.domain.Creative
 import com.adsizzler.mangolaa.wins.domain.WinNotification
 import com.adsizzler.mangolaa.wins.exceptions.ResourceNotFoundException
 import com.adsizzler.mangolaa.wins.service.CreativeService
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Component
 
 import static com.adsizzler.mangolaa.wins.constants.HttpHeaderValues.TEXT_HTML
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE
-
 
 /**
  * Created by ankushsharma on 05/12/17.
@@ -66,7 +66,8 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
             if(ar.succeeded()){
                 def timestamp = DateTime.nowAsUtc()
                 def creative = ar.result()
-                if(creative){
+                if(creative && creative.isActive()){
+                    log.debug 'Creative {}', creative
                     def markupTemplate = creative.markupTemplate
 
                     //Build the markup to send from the markup template by filling macros
@@ -85,12 +86,15 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
                             bidRespId:  bidRespId
                     ).build()
 
+                    log.debug 'Serving Markup {} for creative id {}', markup, creativeId
+
                     //Set response values
                     resp.putHeader(CONTENT_TYPE, TEXT_HTML)
                         .end(markup)
 
                     //Push WinNotification to Kafka
                     def winNotification = new WinNotification(
+                            uuid : UUID.randomUUID(),
                             timestamp : timestamp,
                             creativeId : creativeId,
                             campaignId : campaignId,
@@ -107,10 +111,12 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
                             mbr : mbr,
                             lossCode : lossCode
                     )
+
+                    log.debug 'Win {}', winNotification
                     winNotificationService.queueToKafka(winNotification)
                 }
                 else{
-                    rc.fail(new ResourceNotFoundException("Creative with id $creativeId doesnt exist"))
+                    rc.fail(generateException(creativeId, creative))
                 }
             }
             else{
@@ -119,4 +125,15 @@ class WinsNotificationHandler implements Handler<RoutingContext> {
         }
     }
 
+
+    private static Throwable generateException(creativeId, Creative creative){
+        if(!creative){
+            new ResourceNotFoundException("Creative with id $creativeId doesnt exist")
+        }
+        else{
+            if(!creative.isActive()){
+                new ResourceNotFoundException("Creative with id $creativeId is deactive")
+            }
+        }
+    }
 }

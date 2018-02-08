@@ -11,7 +11,7 @@ import javax.annotation.PreDestroy
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-import static com.adsizzler.mangolaa.wins.constants.HttpHeaderValues.getAPPLICATION_JSON
+import static com.adsizzler.mangolaa.wins.constants.HttpHeaderValues.APPLICATION_JSON
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE
 
 /**

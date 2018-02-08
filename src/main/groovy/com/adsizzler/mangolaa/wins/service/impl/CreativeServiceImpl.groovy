@@ -23,7 +23,7 @@ class CreativeServiceImpl implements CreativeService {
 
     @Override
     Future<Creative> findOneById(Integer id) {
-        Assert.notNull(id, 'id cannot be null')
+        Assert.notNull(id, 'creativeId cannot be null')
         creativeRepository.findOneById(id)
     }
 

@@ -15,7 +15,7 @@ public class Json {
     //https://stackoverflow.com/questions/18611565/how-do-i-correctly-reuse-jackson-objectmapper
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    static{
+    static {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
@@ -41,7 +41,6 @@ public class Json {
     public static String encode(final Object object) throws Exception {
         Assert.notNull(object, "object cannot be null");
         return objectMapper
-                .writer()
                 .writeValueAsString(object);
     }
 
@@ -54,10 +53,8 @@ public class Json {
     public static String encodePretty(final Object object) throws Exception {
         Assert.notNull(object, "object cannot be null");
         return objectMapper
-                .writer()
-                .withDefaultPrettyPrinter()
+                .writerWithDefaultPrettyPrinter()
                 .writeValueAsString(object);
     }
-
 
 }

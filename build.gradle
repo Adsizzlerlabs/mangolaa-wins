@@ -73,8 +73,10 @@ dependencies {
 	compile group: 'io.vertx', name: 'vertx-kafka-client', version: vertxVersion
 
 	//Misc
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.9'
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.9'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.4'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.4'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.4'
+
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 
 	//MySQL and H2

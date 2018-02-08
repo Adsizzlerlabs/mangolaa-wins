@@ -41,7 +41,8 @@ class CreativeServiceSpec extends BaseSpockSpec {
                       status : Status.ACTIVE,
                       campaignId : 2,
                       advertiserId : 3,
-                      clientId:  1
+                      clientId:  1,
+                      markupTemplate:  'https://google.com/'
             )
     }
 
@@ -57,14 +58,17 @@ class CreativeServiceSpec extends BaseSpockSpec {
                             status : Status.ACTIVE,
                             campaignId : 2,
                             advertiserId : 3,
-                            clientId:  1
+                            clientId:  1,
+                            markupTemplate:  'https://google.com/'
+
                     ),
                     new Creative(
                             id :  2,
                             status : Status.DEACTIVE,
                             campaignId : 2,
                             advertiserId : 3,
-                            clientId:  1
+                            clientId:  1,
+                            markupTemplate:  'https://google.com/'
                     )
             ]
     }
