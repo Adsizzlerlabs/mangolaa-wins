@@ -60,7 +60,6 @@ class CreativeServiceSpec extends BaseSpockSpec {
                             advertiserId : 3,
                             clientId:  1,
                             markupTemplate:  'https://google.com/'
-
                     ),
                     new Creative(
                             id :  2,

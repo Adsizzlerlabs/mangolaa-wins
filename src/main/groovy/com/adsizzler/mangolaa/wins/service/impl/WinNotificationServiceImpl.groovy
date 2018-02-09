@@ -32,14 +32,14 @@ class WinNotificationServiceImpl implements WinNotificationService {
 
     static{
         final int threads = Runtime.getRuntime().availableProcessors()
-        log.info 'Initializing {} thread pool with {} threads', this.class.name, threads
+        log.info 'Initializing {} thread pool with {} threads', this.name, threads
         serializationExecutor = Executors.newFixedThreadPool(threads)
     }
 
 
     @PreDestroy
     void cleanup(){
-        log.info 'Shutting down executor pool for class {}', serializationExecutor
+        log.info 'Shutting down executor pool for class {}', this.name
         serializationExecutor.shutdown()
     }
 
